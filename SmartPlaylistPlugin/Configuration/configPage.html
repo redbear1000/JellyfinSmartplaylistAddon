@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Smart Playlist Configuration</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .rule-container {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .expression-container {
+            background-color: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+            border: 1px solid #eee;
+        }
+        .form-group { margin: 10px 0; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        textarea { height: 60px; font-family: monospace; }
+        button {
+            padding: 8px 16px;
+            margin: 5px 2px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .btn-primary { background-color: #007bff; color: white; }
+        .btn-success { background-color: #28a745; color: white; }
+        .btn-danger { background-color: #dc3545; color: white; }
+        .btn-secondary { background-color: #6c757d; color: white; }
+        .btn-info { background-color: #17a2b8; color: white; }
+        .help-text { 
+            font-size: 0.9em; 
+            color: #666; 
+            margin-top: 5px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 3px;
+        }
+        .validation-result {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+        .validation-success { background-color: #d4edda; color: #155724; }
+        .validation-error { background-color: #f8d7da; color: #721c24; }
+        .examples {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .examples h4 { margin-top: 0; }
+        .example-expression {
+            font-family: monospace;
+            background-color: white;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 3px;
+            border-left: 4px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div id="SmartPlaylistConfigPage" data-role="page" class="page type-interior pluginConfigurationPage">
+        <div data-role="content">
+            <div class="content-primary">
+                <div class="verticalSection">
+                    <div class="sectionTitleContainer flex align-items-center">
+                        <h2 class="sectionTitle">Smart Playlist Rules with Boolean Logic</h2>
+                    </div>
+                    
+                    <div class="examples">
+                        <h4>Expression Format & Examples:</h4>
+                        <p><strong>Format:</strong> <code>{[Filter Expression] | Sort | Count}</code></p>
+                        
+                        <div class="example-expression">
+                            {[Genre: Horror AND Action] AND [Length: &gt;90] AND [Language: English OR (Spanish AND NOT Dubbed)] AND [Type: Movie OR Episode] | Random | 5}
+                        </div>
+                        
+                        <div class="example-expression">
+                            {[Genre: NOT (Horror OR Thriller)] AND [Type: Movie] AND [WatchStatus: False] | Rating | 3}
+                        </div>
+                        
+                        <div class="example-expression">
+                            {[Language: NOT English AND (Spanish OR French)] AND [Released: &gt;=2000] | ReleaseDate_Desc | 2}
+                        </div>
+                        
+                        <div class="example-expression">
+                            {[Type: Episode AND NOT Movie] AND [Genre: Comedy OR Drama] AND [Rating: &gt;=7.0] | Random | 10}
+                        </div>
+                        
+                        <p><strong>Available Filters with Boolean Logic Support:</strong></p>
+                        <ul>
+                            <li><strong>Genre:</strong> 
+                                <ul>
+                                    <li>Simple: <code>Horror</code>, <code>Comedy</code></li>
+                                    <li>Negation: <code>NOT Horror</code></li>
+                                    <li>Multiple: <code>Horror AND Action</code>, <code>Comedy OR Drama</code></li>
+                                    <li>Complex: <code>NOT (Horror OR Thriller) AND Action</code></li>
+                                    <li>Parentheses: <code>(Comedy OR Drama) AND NOT Romance</code></li>
+                                </ul>
+                            </li>
+                            <li><strong>Language:</strong> 
+                                <ul>
+                                    <li>Simple: <code>English</code>, <code>Spanish</code></li>
+                                    <li>Multiple: <code>English OR Spanish</code>, <code>NOT English</code></li>
+                                    <li>Complex: <code>NOT English AND (Spanish OR French)</code></li>
+                                </ul>
+                            </li>
+                            <li><strong>Type:</strong> 
+                                <ul>
+                                    <li>Simple: <code>Movie</code>, <code>Episode</code></li>
+                                    <li>Logic: <code>Movie OR Episode</code>, <code>NOT Movie</code></li>
+                                    <li>Note: Useful for complex exclusions</li>
+                                </ul>
+                            </li>
+                            <li><strong>Length:</strong> &lt;90, &gt;120, =90, &lt;=90, &gt;=120 (in minutes)</li>
+                            <li><strong>WatchStatus:</strong> True, False</li>
+                            <li><strong>Released:</strong> &lt;1960, &gt;2000, =1995 (year)</li>
+                            <li><strong>Rating:</strong> &gt;=8.0, &lt;5.0 (community rating)</li>
+                        </ul>
+                        
+                        <p><strong>Advanced Examples:</strong></p>
+                        <div class="example-expression">
+                            {[Genre: (Horror OR Thriller) AND NOT Comedy] AND [Rating: &gt;=6.5] | Rating | 5}
+                        </div>
+                        <div class="example-expression">
+                            {[Language: NOT (English OR Spanish) AND (French OR Italian)] | Random | 2}
+                        </div>
+                        <div class="example-expression">
+                            {[Type: NOT Episode AND Movie] AND [Genre: Action AND (NOT Romance)] | ReleaseDate_Desc | 3}
+                        </div>
+                        
+                        <p><strong>Available Sort Options:</strong></p>
+                        <ul>
+                            <li>Random, Alphabetical, ReleaseDate, ReleaseDate_Desc, Rating, DateAdded, Runtime, Runtime_Desc</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sectionContent">
+                        <div id="rulesContainer">
+                            <!-- Rules will be dynamically added here -->
+                        </div>
+                        <button type="button" class="btn-success" onclick="addNewRule()">Add New Rule</button>
+                        <button type="button" class="btn-primary" onclick="saveConfiguration()">Save Configuration</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var SmartPlaylistConfig = {
+            pluginUniqueId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            rules: []
+        };
+
+        function loadConfiguration() {
+            Dashboard.getPluginConfiguration(SmartPlaylistConfig.pluginUniqueId).then(function(config) {
+                SmartPlaylistConfig.rules = config.PlaylistRules || [];
+                renderRules();
+            });
+        }
+
+        function saveConfiguration() {
+            Dashboard.getPluginConfiguration(SmartPlaylistConfig.pluginUniqueId).then(function(config) {
+                config.PlaylistRules = SmartPlaylistConfig.rules;
+                Dashboard.updatePluginConfiguration(SmartPlaylistConfig.pluginUniqueId, config).then(function() {
+                    Dashboard.alert("Configuration saved!");
+                });
+            });
+        }
+
+        function renderRules() {
+            const container = document.getElementById('rulesContainer');
+            container.innerHTML = '';
+
+            SmartPlaylistConfig.rules.forEach(function(rule, index) {
+                const ruleDiv = document.createElement('div');
+                ruleDiv.className = 'rule-container';
+                ruleDiv.innerHTML = `
+                    <div class="form-group">
+                        <label>Rule Name:</label>
+                        <input type="text" value="${rule.Name || ''}" onchange="updateRuleName(${index}, this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Priority:</label>
+                        <input type="number" value="${rule.Priority || 0}" onchange="updateRulePriority(${index}, this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" ${rule.IsEnabled ? 'checked' : ''} onchange="toggleRuleEnabled(${index}, this.checked)">
+                            Enabled
+                        </label>
+                    </div>
+                    <div id="expressions-${index}">
+                        <h4>Boolean Logic Expressions:</h4>
+                        ${renderExpressions(rule.Expressions || [], index)}
+                    </div>
+                    <button type="button" class="btn-secondary" onclick="addExpression(${index})">Add Expression</button>
+                    <button type="button" class="btn-info" onclick="testRule(${index})">Test Rule</button>
+                    <button type="button" class="btn-danger" onclick="deleteRule(${index})">Delete Rule</button>
+                `;
+                container.appendChild(ruleDiv);
+            });
+        }
+
+        function renderExpressions(expressions, ruleIndex) {
+            return expressions.map(function(expression, expressionIndex) {
+                return `
+                    <div class="expression-container">
+                        <div class="form-group">
+                            <label>Expression ${expressionIndex + 1}:</label>
+                            <textarea onchange="updateExpression(${ruleIndex}, ${expressionIndex}, this.value)" 
+                                     onblur="validateExpression(this, '${expression}')">${expression}</textarea>
+                            <div class="help-text">
+                                Example: {[Genre: NOT Horror] AND [Type: Movie] | Random | 5}
+                            </div>
+                            <div id="validation-${ruleIndex}-${expressionIndex}" class="validation-result" style="display: none;"></div>
+                        </div>
+                        <button type="button" class="btn-info" onclick="validateExpressionButton(${ruleIndex}, ${expressionIndex})">Validate</button>
+                        <button type="button" class="btn-danger" onclick="deleteExpression(${ruleIndex}, ${expressionIndex})">Delete Expression</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function addNewRule() {
+            SmartPlaylistConfig.rules.push({
+                Id: generateGuid(),
+                Name: "New Rule",
+                Expressions: [],
+                IsEnabled: true,
+                Priority: 0
+            });
+            renderRules();
+        }
+
+        function deleteRule(index) {
+            if (confirm('Are you sure you want to delete this rule?')) {
+                SmartPlaylistConfig.rules.splice(index, 1);
+                renderRules();
+            }
+        }
+
+        function addExpression(ruleIndex) {
+            SmartPlaylistConfig.rules[ruleIndex].Expressions.push(
+                "{[Genre: Comedy OR Drama] AND [Type: Movie] | Random | 1}"
+            );
+            renderRules();
+        }
+
+        function deleteExpression(ruleIndex, expressionIndex) {
+            SmartPlaylistConfig.rules[ruleIndex].Expressions.splice(expressionIndex, 1);
+            renderRules();
+        }
+
+        function updateRuleName(index, value) {
+            SmartPlaylistConfig.rules[index].Name = value;
+        }
+
+        function updateRulePriority(index, value) {
+            SmartPlaylistConfig.rules[index].Priority = parseInt(value);
+        }
+
+        function toggleRuleEnabled(index, enabled) {
+            SmartPlaylistConfig.rules[index].IsEnabled = enabled;
+        }
+
+        function updateExpression(ruleIndex, expressionIndex, value) {
+            SmartPlaylistConfig.rules[ruleIndex].Expressions[expressionIndex] = value;
+        }
+
+        function validateExpressionButton(ruleIndex, expressionIndex) {
+            const expression = SmartPlaylistConfig.rules[ruleIndex].Expressions[expressionIndex];
+            validateExpression(null, expression, `validation-${ruleIndex}-${expressionIndex}`);
+        }
+
+        function validateExpression(element, expression, targetId) {
+            if (!targetId && element) {
+                // Find the validation div for this expression
+                const container = element.closest('.expression-container');
+                const validationDiv = container.querySelector('.validation-result');
+                targetId = validationDiv.id;
+            }
+
+            // Simple client-side validation
+            const validationDiv = document.getElementById(targetId);
+            if (!validationDiv) return;
+
+            validationDiv.style.display = 'block';
+
+            // Basic format check
+            const formatRegex = /^\{.+\|.+\|\d+\}$/;
+            if (!formatRegex.test(expression.trim())) {
+                validationDiv.className = 'validation-result validation-error';
+                validationDiv.textContent = 'Invalid format. Expected: {[filters] | sort | count}';
+                return;
+            }
+
+            // More detailed validation could be added here
+            validationDiv.className = 'validation-result validation-success';
+            validationDiv.textContent = 'Expression format appears valid!';
+
+            // TODO: Call server-side validation endpoint
+            /*
+            fetch('/SmartPlaylist/ValidateExpression', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(expression)
+            }).then(response => response.json())
+            .then(result => {
+                if (result.Valid) {
+                    validationDiv.className = 'validation-result validation-success';
+                    validationDiv.textContent = 'Expression is valid!';
+                } else {
+                    validationDiv.className = 'validation-result validation-error';
+                    validationDiv.textContent = 'Error: ' + result.Error;
+                }
+            });
+            */
+        }
+
+        function testRule(ruleIndex) {
+            const rule = SmartPlaylistConfig.rules[ruleIndex];
+            alert('Rule testing functionality would be implemented here.\n\nRule: ' + rule.Name + 
+                  '\nExpressions: ' + rule.Expressions.length);
+        }
+
+        function generateGuid() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0,
+                    v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadConfiguration();
+        });
+    </script>
+</body>
+</html>
