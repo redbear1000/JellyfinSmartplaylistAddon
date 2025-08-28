@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kylep\\OneDrive\\Documents\\Python Scripts\\JFin SmartPlaylist Plugin\\SmartPlaylistPlugin\\SmartPlaylist.csproj": {}
+    "/workspaces/JellyfinSmartplaylistAddon/SmartPlaylistPlugin/SmartPlaylist.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kylep\\OneDrive\\Documents\\Python Scripts\\JFin SmartPlaylist Plugin\\SmartPlaylistPlugin\\SmartPlaylist.csproj": {
+    "/workspaces/JellyfinSmartplaylistAddon/SmartPlaylistPlugin/SmartPlaylist.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kylep\\OneDrive\\Documents\\Python Scripts\\JFin SmartPlaylist Plugin\\SmartPlaylistPlugin\\SmartPlaylist.csproj",
+        "projectUniqueName": "/workspaces/JellyfinSmartplaylistAddon/SmartPlaylistPlugin/SmartPlaylist.csproj",
         "projectName": "SmartPlaylist",
-        "projectPath": "C:\\Users\\kylep\\OneDrive\\Documents\\Python Scripts\\JFin SmartPlaylist Plugin\\SmartPlaylistPlugin\\SmartPlaylist.csproj",
-        "packagesPath": "C:\\Users\\kylep\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kylep\\OneDrive\\Documents\\Python Scripts\\JFin SmartPlaylist Plugin\\SmartPlaylistPlugin\\obj\\",
+        "projectPath": "/workspaces/JellyfinSmartplaylistAddon/SmartPlaylistPlugin/SmartPlaylist.csproj",
+        "packagesPath": "/home/codespace/.nuget/packages/",
+        "outputPath": "/workspaces/JellyfinSmartplaylistAddon/SmartPlaylistPlugin/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\kylep\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/codespace/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -49,11 +49,11 @@
             },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.2, )"
             },
             "Microsoft.Extensions.Logging.Abstractions": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.2, )"
             }
           },
           "imports": [
@@ -72,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.412/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

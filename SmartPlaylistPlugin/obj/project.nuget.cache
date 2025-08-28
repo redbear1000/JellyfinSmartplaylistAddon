@@ -1,63 +1,35 @@
 {
   "version": 2,
-  "dgSpecHash": "1HvObvI1mY8=",
-  "success": false,
-  "projectFilePath": "C:\\Users\\kylep\\OneDrive\\Documents\\Python Scripts\\JFin SmartPlaylist Plugin\\SmartPlaylistPlugin\\SmartPlaylist.csproj",
+  "dgSpecHash": "3va77Dpgzf8=",
+  "success": true,
+  "projectFilePath": "/workspaces/JellyfinSmartplaylistAddon/SmartPlaylistPlugin/SmartPlaylist.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\kylep\\.nuget\\packages\\diacritics\\3.3.29\\diacritics.3.3.29.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\icu4n\\60.1.0-alpha.356\\icu4n.60.1.0-alpha.356.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\icu4n.transliterator\\60.1.0-alpha.356\\icu4n.transliterator.60.1.0-alpha.356.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\j2n\\2.0.0\\j2n.2.0.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\jellyfin.common\\10.10.0\\jellyfin.common.10.10.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\jellyfin.controller\\10.10.0\\jellyfin.controller.10.10.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\jellyfin.data\\10.10.0\\jellyfin.data.10.10.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\jellyfin.extensions\\10.10.0\\jellyfin.extensions.10.10.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\jellyfin.model\\10.10.0\\jellyfin.model.10.10.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\jellyfin.naming\\10.10.0\\jellyfin.naming.10.10.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\2.0.0\\microsoft.extensions.caching.abstractions.2.0.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\microsoft.extensions.caching.memory\\2.0.0\\microsoft.extensions.caching.memory.2.0.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\microsoft.extensions.configuration.binder\\8.0.2\\microsoft.extensions.configuration.binder.8.0.2.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.1\\microsoft.extensions.dependencyinjection.8.0.1.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\microsoft.extensions.logging\\8.0.1\\microsoft.extensions.logging.8.0.1.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\microsoft.extensions.options\\8.0.2\\microsoft.extensions.options.8.0.2.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\system.text.json\\8.0.5\\system.text.json.8.0.5.nupkg.sha512",
-    "C:\\Users\\kylep\\.nuget\\packages\\system.threading.tasks.dataflow\\8.0.1\\system.threading.tasks.dataflow.8.0.1.nupkg.sha512"
+    "/home/codespace/.nuget/packages/diacritics/3.3.29/diacritics.3.3.29.nupkg.sha512",
+    "/home/codespace/.nuget/packages/icu4n/60.1.0-alpha.356/icu4n.60.1.0-alpha.356.nupkg.sha512",
+    "/home/codespace/.nuget/packages/icu4n.transliterator/60.1.0-alpha.356/icu4n.transliterator.60.1.0-alpha.356.nupkg.sha512",
+    "/home/codespace/.nuget/packages/j2n/2.0.0/j2n.2.0.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/jellyfin.common/10.10.0/jellyfin.common.10.10.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/jellyfin.controller/10.10.0/jellyfin.controller.10.10.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/jellyfin.data/10.10.0/jellyfin.data.10.10.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/jellyfin.extensions/10.10.0/jellyfin.extensions.10.10.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/jellyfin.model/10.10.0/jellyfin.model.10.10.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/jellyfin.naming/10.10.0/jellyfin.naming.10.10.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.extensions.caching.abstractions/2.0.0/microsoft.extensions.caching.abstractions.2.0.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.extensions.caching.memory/2.0.0/microsoft.extensions.caching.memory.2.0.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.extensions.configuration.binder/8.0.2/microsoft.extensions.configuration.binder.8.0.2.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.extensions.dependencyinjection/8.0.1/microsoft.extensions.dependencyinjection.8.0.1.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.2/microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.extensions.logging/8.0.1/microsoft.extensions.logging.8.0.1.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.2/microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.extensions.options/8.0.2/microsoft.extensions.options.8.0.2.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.extensions.primitives/8.0.0/microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/system.globalization/4.3.0/system.globalization.4.3.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/system.runtime/4.3.0/system.runtime.4.3.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/system.text.json/8.0.5/system.text.json.8.0.5.nupkg.sha512",
+    "/home/codespace/.nuget/packages/system.threading.tasks.dataflow/8.0.1/system.threading.tasks.dataflow.8.0.1.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1605",
-      "level": "Error",
-      "message": "Warning As Error: Detected package downgrade: Microsoft.Extensions.DependencyInjection.Abstractions from 8.0.2 to 8.0.0. Reference the package directly from the project to select a different version. \r\n SmartPlaylist -> Jellyfin.Controller 10.10.0 -> Jellyfin.Common 10.10.0 -> Microsoft.Extensions.DependencyInjection.Abstractions (>= 8.0.2) \r\n SmartPlaylist -> Microsoft.Extensions.DependencyInjection.Abstractions (>= 8.0.0)",
-      "libraryId": "Microsoft.Extensions.DependencyInjection.Abstractions",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    },
-    {
-      "code": "NU1605",
-      "level": "Error",
-      "message": "Warning As Error: Detected package downgrade: Microsoft.Extensions.Logging.Abstractions from 8.0.2 to 8.0.0. Reference the package directly from the project to select a different version. \r\n SmartPlaylist -> Jellyfin.Controller 10.10.0 -> Jellyfin.Model 10.10.0 -> Microsoft.Extensions.Logging.Abstractions (>= 8.0.2) \r\n SmartPlaylist -> Microsoft.Extensions.Logging.Abstractions (>= 8.0.0)",
-      "libraryId": "Microsoft.Extensions.Logging.Abstractions",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    },
-    {
-      "code": "NU1605",
-      "level": "Error",
-      "message": "Warning As Error: Detected package downgrade: Microsoft.Extensions.DependencyInjection.Abstractions from 8.0.2 to 8.0.0. Reference the package directly from the project to select a different version. \r\n SmartPlaylist -> Jellyfin.Controller 10.10.0 -> Jellyfin.Model 10.10.0 -> Jellyfin.Data 10.10.0 -> Microsoft.Extensions.Logging 8.0.1 -> Microsoft.Extensions.DependencyInjection 8.0.1 -> Microsoft.Extensions.DependencyInjection.Abstractions (>= 8.0.2) \r\n SmartPlaylist -> Microsoft.Extensions.DependencyInjection.Abstractions (>= 8.0.0)",
-      "libraryId": "Microsoft.Extensions.DependencyInjection.Abstractions",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }

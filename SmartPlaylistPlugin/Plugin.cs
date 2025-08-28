@@ -24,7 +24,7 @@ namespace SmartPlaylist
             Instance = this;
         }
 
-        public static Plugin Instance { get; private set; }
+        public static Plugin? Instance { get; private set; }
 
         public IEnumerable<PluginPageInfo> GetPages()
         {
@@ -39,10 +39,3 @@ namespace SmartPlaylist
         }
     }
 }
-
-
-
-
-
-
-

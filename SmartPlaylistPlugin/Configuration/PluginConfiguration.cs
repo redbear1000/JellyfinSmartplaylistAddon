@@ -11,7 +11,7 @@ namespace SmartPlaylist.Configuration
 
         public PluginConfiguration()
         {
-            PlaylistRules = [];
+            PlaylistRules = new List<PlaylistRule>();
         }
     }
 
@@ -26,7 +26,8 @@ namespace SmartPlaylist.Configuration
         public PlaylistRule()
         {
             Id = Guid.NewGuid().ToString();
-            Expressions = [];
+            Name = string.Empty;
+            Expressions = new List<string>();
             IsEnabled = true;
             Priority = 0;
         }

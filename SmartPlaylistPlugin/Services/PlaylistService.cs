@@ -3,13 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Jellyfin.Data.Entities;
+using Jellyfin.Data.Enums;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Controller.Entities.TV;
 using MediaBrowser.Controller.Library;
 using MediaBrowser.Controller.Playlists;
-using MediaBrowser.Controller.Session;
 using MediaBrowser.Model.Entities;
+using MediaBrowser.Model.Playlists;
 using SmartPlaylist.Configuration;
 using SmartPlaylist.Models;
 using Microsoft.Extensions.Logging;
@@ -21,6 +23,7 @@ namespace SmartPlaylist.Services
         private readonly ILibraryManager _libraryManager;
         private readonly IPlaylistManager _playlistManager;
         private readonly IUserDataManager _userDataManager;
+        private readonly IUserManager _userManager;
         private readonly ExpressionParser _parser;
         private readonly ILogger<PlaylistService> _logger;
 
@@ -28,23 +31,30 @@ namespace SmartPlaylist.Services
             ILibraryManager libraryManager, 
             IPlaylistManager playlistManager,
             IUserDataManager userDataManager,
+            IUserManager userManager,
             ExpressionParser parser,
             ILogger<PlaylistService> logger)
         {
             _libraryManager = libraryManager;
             _playlistManager = playlistManager;
             _userDataManager = userDataManager;
+            _userManager = userManager;
             _parser = parser;
             _logger = logger;
         }
 
         public async Task<Playlist> GenerateSmartPlaylist(string userId, PlaylistRule rule)
         {
-            var user = _libraryManager.GetUserById(Guid.Parse(userId));
+            var user = _userManager.GetUserById(Guid.Parse(userId));
+            if (user == null)
+            {
+                throw new ArgumentException($"User with ID {userId} not found");
+            }
+
             var allItems = new List<BaseItem>();
 
             // Get all content and convert to ContentItem format
-            var contentItems = GetAllContentItems(user!);
+            var contentItems = GetAllContentItems(user);
 
             // Process each expression and collect items
             foreach (var expression in rule.Expressions)
@@ -71,24 +81,27 @@ namespace SmartPlaylist.Services
 
             // Create the playlist
             var playlistName = $"Smart Playlist: {rule.Name}";
-            var playlist = await _playlistManager.CreatePlaylist(new PlaylistCreationRequest
+            var playlistId = await _playlistManager.CreatePlaylist(new PlaylistCreationOptions
             {
                 Name = playlistName,
-                ItemIdList = allItems.Select(i => i.Id).ToArray(),
-                UserId = user.Id
+                ItemIdList = allItems.Select(i => i.Id.ToString()).ToArray(),
+                UserId = user.Id,
+                MediaType = "Audio,Video"
             });
 
-            return playlist;
+            // Return the created playlist
+            var createdPlaylist = _libraryManager.GetItemById(playlistId) as Playlist;
+            return createdPlaylist ?? throw new InvalidOperationException("Failed to create playlist");
         }
 
-        private List<ContentItem> GetAllContentItems(MediaBrowser.Controller.Entities.User user)
+        private List<ContentItem> GetAllContentItems(User user)
         {
             var items = new List<ContentItem>();
 
             // Get all movies and episodes
             var allItems = _libraryManager.GetItemList(new InternalItemsQuery(user)
             {
-                IncludeItemTypes = new[] { typeof(Movie).Name, typeof(Episode).Name },
+                IncludeItemTypes = new[] { BaseItemKind.Movie, BaseItemKind.Episode },
                 IsVirtualItem = false
             });
 
@@ -99,7 +112,7 @@ namespace SmartPlaylist.Services
                     Id = item.Id.ToString(),
                     Name = item.Name,
                     Type = item is Movie ? "Movie" : "Episode",
-                    Genres = item.Genres?.ToList() ?? [],
+                    Genres = item.Genres?.ToList() ?? new List<string>(),
                     RuntimeMinutes = item.RunTimeTicks.HasValue ? (int)(item.RunTimeTicks.Value / TimeSpan.TicksPerMinute) : null,
                     Language = item.GetPreferredMetadataLanguage(),
                     ReleaseYear = item.ProductionYear,

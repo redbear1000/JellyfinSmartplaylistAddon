@@ -17,24 +17,30 @@ namespace SmartPlaylist.Controllers
     [Authorize]
     public class SmartPlaylistController : ControllerBase
     {
-        private readonly PlaylistService _playlistService;
-        private readonly ExpressionParser _parser;
+        private readonly ILibraryManager _libraryManager;
+        private readonly IPlaylistManager _playlistManager;
+        private readonly IUserDataManager _userDataManager;
+        private readonly IUserManager _userManager;
         private readonly ILogger<SmartPlaylistController> _logger;
 
         public SmartPlaylistController(
-            PlaylistService playlistService,
-            ExpressionParser parser,
+            ILibraryManager libraryManager,
+            IPlaylistManager playlistManager,
+            IUserDataManager userDataManager,
+            IUserManager userManager,
             ILogger<SmartPlaylistController> logger)
         {
-            _playlistService = playlistService;
-            _parser = parser;
+            _libraryManager = libraryManager;
+            _playlistManager = playlistManager;
+            _userDataManager = userDataManager;
+            _userManager = userManager;
             _logger = logger;
         }
 
         [HttpGet("Rules")]
         public ActionResult<List<PlaylistRule>> GetRules()
         {
-            return Ok(Plugin.Instance.Configuration.PlaylistRules);
+            return Ok(Plugin.Instance?.Configuration.PlaylistRules ?? new List<PlaylistRule>());
         }
 
         [HttpPost("Rules")]
@@ -42,6 +48,9 @@ namespace SmartPlaylist.Controllers
         {
             try
             {
+                if (Plugin.Instance == null)
+                    return BadRequest("Plugin not initialized");
+
                 Plugin.Instance.Configuration.PlaylistRules.Add(rule);
                 Plugin.Instance.SaveConfiguration();
                 return Ok(rule);
@@ -58,6 +67,9 @@ namespace SmartPlaylist.Controllers
         {
             try
             {
+                if (Plugin.Instance == null)
+                    return BadRequest("Plugin not initialized");
+
                 var existingRule = Plugin.Instance.Configuration.PlaylistRules
                     .Find(r => r.Id == id);
                 
@@ -82,6 +94,9 @@ namespace SmartPlaylist.Controllers
         {
             try
             {
+                if (Plugin.Instance == null)
+                    return BadRequest("Plugin not initialized");
+
                 var rule = Plugin.Instance.Configuration.PlaylistRules
                     .Find(r => r.Id == id);
                 
@@ -105,7 +120,8 @@ namespace SmartPlaylist.Controllers
         {
             try
             {
-                var parsed = _parser.Parse(expression);
+                var parser = new ExpressionParser();
+                var parsed = parser.Parse(expression);
                 return Ok(new { Valid = true, Parsed = parsed });
             }
             catch (Exception ex)
@@ -119,13 +135,26 @@ namespace SmartPlaylist.Controllers
         {
             try
             {
+                if (Plugin.Instance == null)
+                    return BadRequest("Plugin not initialized");
+
                 var rule = Plugin.Instance.Configuration.PlaylistRules
                     .Find(r => r.Id == ruleId);
                 
                 if (rule == null)
                     return NotFound("Rule not found");
 
-                var playlist = await _playlistService.GenerateSmartPlaylist(userId, rule);
+                var parser = new ExpressionParser();
+                var playlistService = new PlaylistService(
+                    _libraryManager,
+                    _playlistManager,
+                    _userDataManager,
+                    _userManager,
+                    parser,
+                    _logger.CreateLogger<PlaylistService>()
+                );
+
+                var playlist = await playlistService.GenerateSmartPlaylist(userId, rule);
                 return Ok(new { PlaylistId = playlist.Id, Name = playlist.Name });
             }
             catch (Exception ex)

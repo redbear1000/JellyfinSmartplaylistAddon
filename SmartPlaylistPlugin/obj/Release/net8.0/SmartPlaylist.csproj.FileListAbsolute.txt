@@ -1,0 +1,4 @@
+/workspaces/JellyfinSmartplaylistAddon/SmartPlaylistPlugin/obj/Release/net8.0/SmartPlaylist.csproj.AssemblyReference.cache
+/workspaces/JellyfinSmartplaylistAddon/SmartPlaylistPlugin/obj/Release/net8.0/SmartPlaylist.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/JellyfinSmartplaylistAddon/SmartPlaylistPlugin/obj/Release/net8.0/SmartPlaylist.csproj.CoreCompileInputs.cache
+/workspaces/JellyfinSmartplaylistAddon/SmartPlaylistPlugin/obj/Release/net8.0/SmartPlaylist.sourcelink.json
